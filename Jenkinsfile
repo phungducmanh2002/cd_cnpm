@@ -14,7 +14,7 @@ pipeline {
         stage('print env') {
             steps {
                 script{
-                    echo ${env.DOCKER_TAG}
+                    echo "${env.DOCKER_TAG}"
                 }
             }
         }
