@@ -52,7 +52,7 @@ pipeline {
                     def cmd = "#!/bin/bash \n" +
                     "docker rm -f ${DOCKER_CONTAINER_NAME} \n" + 
                     "docker pull ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG} \n" + 
-                    "docker run --name=${DOCKER_CONTAINER_NAME} -dp 8080:80 -e WORDPRESS_DB_HOST=mysqldb -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=1 ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG} \n"
+                    "docker run --name=${DOCKER_CONTAINER_NAME} --network mynet -dp 8080:80 -e WORDPRESS_DB_HOST=mysqldb -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=1 ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG} \n"
 
                     sshagent(credentials:['jenkins_ssh_key']){
                         sh """
