@@ -5,7 +5,7 @@ pipeline {
         DB_HOST = 'mysqldb'
         DB_USER = 'root'
         DB_PASSWORD = '1'
-        DOCKER_IMAGE = 'mywp'
+        DOCKER_IMAGE = 'phungducmanh666/mywp'
         DOCKER_TAG = "${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"
     }
 
@@ -24,7 +24,7 @@ pipeline {
                 script{
                     echo 'Building...'
                     // build image
-                    sh 'docker build -t mywp .'
+                    sh "docker build -t ${env.DOCKER_IMAGE}:${DOCKER_TAG} ."
 
                 }
             }
