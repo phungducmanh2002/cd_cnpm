@@ -10,6 +10,15 @@ pipeline {
     }
 
     stages {
+
+        stage('print env') {
+            steps {
+                script{
+                    echo ${env.DOCKER_TAG}
+                }
+            }
+        }
+
         stage('build image') {
             steps {
                 script{
