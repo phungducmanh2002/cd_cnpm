@@ -49,14 +49,14 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying...'
-                    // def cmd = "#!/bin/bash \n" +
-                    // "docker rm -f ${DOCKER_CONTAINER_NAME} \n" + 
-                    // "docker pull ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG} \n" + 
-                    // "docker run --name=${DOCKER_CONTAINER_NAME} -dp 8080:80 -e WORDPRESS_DB_HOST=mysqldb -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=1 ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG} \n"
+                    def cmd = "#!/bin/bash \n" +
+                    "docker rm -f ${DOCKER_CONTAINER_NAME} \n" + 
+                    "docker pull ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG} \n" + 
+                    "docker run --name=${DOCKER_CONTAINER_NAME} -dp 8080:80 -e WORDPRESS_DB_HOST=mysqldb -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=1 ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG} \n"
 
                     sshagent(credentials:['jenkins_ssh_key']){
                         sh """
-                            ssh -o stricthostkeychecking=no -i jenkins_ssh_key sa@192.168.235.130 "echo cc > hehe.txt"
+                            ssh -o stricthostkeychecking=no -i jenkins_ssh_key sa@192.168.235.130 "echo \\\"${cmd}\\\" > deploy.sh && chmod +x deploy.sh && ./deploy.sh"
                         """
                     }
                 }
