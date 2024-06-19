@@ -56,7 +56,7 @@ pipeline {
 
                     sshagent(credentials:['jenkins_ssh_key']){
                         sh """
-                            ssh -o stricthostkeychecking=no jenkins_ssh_key sa@192.168.235.130 "echo cc > hehe.txt"
+                            ssh -o stricthostkeychecking=no -i jenkins_ssh_key sa@192.168.235.130 "echo cc > hehe.txt"
                         """
                     }
                 }
