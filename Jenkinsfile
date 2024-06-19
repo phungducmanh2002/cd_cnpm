@@ -33,7 +33,9 @@ pipeline {
         stage('push image') {
             steps {
                 echo 'Testing...'
-                sh "echo ${DOCKER_CREDENTIALS_PSW} | docker login -u ${DOCKER_CREDENTIALS_USR} --password-stdin"
+                sh "echo ${DOCKER_CREDENTIALS_PSW} | docker login -u ${DOCKER_CREDENTIALS_USR} --password-stdin \
+                && docker push ${env.DOCKER_IMAGE}:${DOCKER_TAG} \
+                "
             }
         }
 
