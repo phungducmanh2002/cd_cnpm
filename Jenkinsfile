@@ -7,6 +7,7 @@ pipeline {
         DB_PASSWORD = '1'
         DOCKER_IMAGE = 'phungducmanh666/mywp'
         DOCKER_TAG = "${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"
+        DOCKER_CREDENTIALS = credentials('docker_credentials')
     }
 
     stages {
@@ -25,7 +26,6 @@ pipeline {
                     echo 'Building...'
                     // build image
                     sh "docker build -t ${env.DOCKER_IMAGE}:${DOCKER_TAG} ."
-
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
         stage('push image') {
             steps {
                 echo 'Testing...'
-                // Thực hiện lệnh test, ví dụ: chạy unit tests
+                sh "echo ${DOCKER_CREDENTIALS_PSW} | docker login -u ${DOCKER_CREDENTIALS_USR} --password-stdin"
             }
         }
 
