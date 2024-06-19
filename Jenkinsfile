@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script{
                     echo 'Building...'
-                    // build image ne
+                    // build image nene
                     sh "docker build -t ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG} ."
                 }
             }
