@@ -15,7 +15,7 @@ pipeline {
                 script{
                     echo 'Building...'
                     // build image
-                    sh 'docker build -t ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} .'
+                    sh 'docker build -t mywp .'
 
                 }
             }
