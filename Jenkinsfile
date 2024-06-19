@@ -38,7 +38,7 @@ pipeline {
                     // login -> push -> remove local image
                     echo 'Push image...'
                     sh "echo ${DOCKER_CREDENTIALS_PSW} | docker login -u ${DOCKER_CREDENTIALS_USR} --password-stdin \
-                    && docker push ${env.DOCKER_IMAGE}:${DOCKER_TAG} \
+                    && docker push ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG} \
                     && docker rmi  ${DOCKER_HUB}/${env.DOCKER_IMAGE}:${DOCKER_TAG}\
                     "
                 }
