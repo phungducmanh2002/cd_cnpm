@@ -15,9 +15,7 @@ pipeline {
                 script{
                     echo 'Building...'
                     // build image
-                    sh '''docker build -t ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}
-                    && docker image ls
-                    '''
+                    sh 'docker build -t ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} .'
 
                 }
             }
